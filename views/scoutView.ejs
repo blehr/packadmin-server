@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+    <h1><%= title %></h1>
+    <p>Welcome to <%= title %></p>
+    <a href="/addscout" class="btn btn-default">Add A Scout</a>
+    
+    <% if (message) { %>
+      <div class="alert alert-danger alert-warning">
+        <%=message%>
+      </div>
+    <% } %>
+    
+    
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-6">
+                <% scouts.forEach(function(scout) { %>
+                    <div>
+                        <h2>Scout</h2>
+                        
+                        <table class="table table-striped">
+                            <tr>
+                                <td>Name: </td>
+                                <td><a href="/scouts/edit/<%= scout._id %>" ><%= scout.scoutName.first %> <%= scout.scoutName.last %></a></td>
+                            </tr>
+                            
+                            <tr>
+                                <td>Address:</td>
+                                <td><%= scout.address.street %><br>
+                          
+                                    <% if (scout.address.mail) { %><%= scout.address.mail %><br><% } %>
+                                      
+                                    <%= scout.address.city %>, <%= scout.address.state %> <%= scout.address.zipCode %>
+                              </td>
+                            </tr>
+                            
+                            <tr>
+                                <td>Birthday</td>
+                                <td><%= scout.birthday.date %></td>
+                            </tr>
+                            
+                            <tr>
+                                <td>Den: </td>
+                                <td><%= scout.den %></td>
+                            </tr>
+                            
+                            <tr>
+                                <td>Pictures Allowed?</td>
+                                <td><%= scout.picturesAllowed %></td>
+                            </tr>
+                            
+                            <tr>
+                                <td>Dues Paid?</td>
+                                <td><%= scout.dues %></td>
+                            </tr>
+                            
+                            <tr>
+                                <td>Received a Book?</td>
+                                <td><%= scout.book %></td>
+                            </tr>
+                            
+                            <tr>
+                                <td>Received a Boat?</td>
+                                <td><%= scout.boat %></td>
+                            </tr>
+                            
+                            <tr>
+                                <td>Received a Car?</td>
+                                <td><%= scout.car %></td>
+                            </tr>
+                            
+                            <tr>
+                                <td>Notes:</td>
+                                <td><%= scout.notes %></td>
+                            </tr>
+                        </table>
+                       
+                    </div>
+                    <div>
+                        <h2>Parents</h2>
+                        
+                        <% if (scout.parent1) { %>
+                        
+                        <table class="table table-striped">
+                            <tr>
+                                <td>Name:</td>
+                                <td><%= scout.parent1.name.first %> <%= scout.parent1.name.last %></td>
+                            </tr>
+                            
+                            <tr>
+                                <td>Relation to Scout:</td>
+                                <td><%= scout.parent1.relationToScout %></td>
+                            </tr>
+                            
+                            <tr>
+                                <td>Address Same as Scout:</td>
+                                <td><%= scout.parent1.address.sameAsScout %></td>
+                            </tr>
+                            
+                            <% if (scout.parent1.sameAsScout) { %>
+                            <tr>
+                                <td><%= scout.parent1.address.street %><br>
+                                    <% if (scout.parent1.address.mail) { %><%= scout.parent1.address.mail %><br><% } %>
+                                    <%= scout.parent1.address.city %>, <%= scout.parent1.address.state %> <%= scout.parent1.address.zipCode %></td>
+                                <td></td>
+                            </tr>
+                            <% } %>
+                            
+                            <% if (scout.parent1.phoneNumberMobile) { %>
+                            <tr>
+                                <td>Mobile #</td>
+                                <td><%= scout.parent1.phoneNumberMobile %></td>
+                            </tr>
+                            <% } %>
+                            
+                            <% if (scout.parent1.phoneNumberHome) { %>
+                            <tr>
+                                <td>Mobile #</td>
+                                <td><%= scout.parent1.phoneNumberHome %></td>
+                            </tr>
+                            <% } %>
+                            
+                            <% if (scout.parent1.phoneNumberWork) { %>
+                            <tr>
+                                <td>Mobile #</td>
+                                <td><%= scout.parent1.phoneNumberWork %></td>
+                            </tr>
+                            <% } %>
+                            
+                        </table>
+                        
+                        <% } %>
+
+                   
+                        <!--parent2-->
+                        <% if (scout.parent2) { %>
+                            
+                        <table class="table table-striped">
+                        <tr>
+                            <td>Name:</td>
+                            <td><%= scout.parent2.name.first %> <%= scout.parent2.name.last %></td>
+                        </tr>
+                        
+                        <tr>
+                            <td>Relation to Scout:</td>
+                            <td><%= scout.parent2.relationToScout %></td>
+                        </tr>
+                        
+                        <tr>
+                            <td>Address Same as Scout:</td>
+                            <td><%= scout.parent2.address.sameAsScout %></td>
+                        </tr>
+                        
+                        <% if (scout.parent2.sameAsScout) { %>
+                        <tr>
+                            <td><%= scout.parent2.address.street %><br>
+                                <% if (scout.parent2.address.mail) { %><%= scout.parent2.address.mail %><br><% } %>
+                                <%= scout.parent2.address.city %>, <%= scout.parent2.address.state %> <%= scout.parent2.address.zipCode %></td>
+                            <td></td>
+                        </tr>
+                        <% } %>
+                        
+                        <% if (scout.parent2.phoneNumberMobile) { %>
+                        <tr>
+                            <td>Mobile #</td>
+                            <td><%= scout.parent2.phoneNumberMobile %></td>
+                        </tr>
+                        <% } %>
+                        
+                        <% if (scout.parent2.phoneNumberHome) { %>
+                        <tr>
+                            <td>Mobile #</td>
+                            <td><%= scout.parent2.phoneNumberHome %></td>
+                        </tr>
+                        <% } %>
+                        
+                        <% if (scout.parent2.phoneNumberWork) { %>
+                        <tr>
+                            <td>Mobile #</td>
+                            <td><%= scout.parent2.phoneNumberWork %></td>
+                        </tr>
+                        <% } %>
+                        
+                    </table>
+                    
+                        <% } %>
+                    </div>
+                
+                <% }) %>
+            </div>
+        </div>
+    </div>
+
+        
+    <script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+  </body>
+</html>

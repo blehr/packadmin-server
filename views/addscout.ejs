@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+    <h1><%= title %></h1>
+    <p>Welcome to <%= title %></p>
+    <a href="/" class="btn btn-default">Home</a>
+    <% if (message) { %>
+      <div class="alert alert-danger alert-warning">
+        <%=message%>
+      </div>
+    <% } %>
+    
+    
+    <div class="container">
+        <form action="/addscout" method="POST">
+            
+            <div class="row">
+                <h2 class="text-center">Scout's Information</h2>
+                <div class="col-sm-6">
+
+                        <!--scout name-->
+                        <div class="form-group">
+                            <label for="scoutName.first" >Scout's First Name</label>
+                            <input type="text" name="scoutName.first" class="form-control"/>
+                        </div>
+                        <div class="form-group">
+                            <label for="scoutName.last" >Scout's Last Name</label>
+                            <input type="text" name="scoutName.last" class="form-control"/>
+                        </div>
+                        
+                         <!--scout address-->
+                        <fieldset>
+                            <legend>Address</legend>
+                            <div class="form-group">
+                                <label for="address.street" >Scout's Street Address</label>
+                                <input type="text" name="address.street" class="form-control"/>
+                            </div>
+                            <div class="form-group">
+                                <label for="address.mail" >Scout's Mailing Address</label>
+                                <input type="text" name="address.mail" class="form-control"/>
+                            </div>
+                            <div class="form-group">
+                                <label for="address.city" >Scout's City</label>
+                                <input type="text" name="address.city" class="form-control"/>
+                            </div>
+                            <div class="form-group">
+                                <label for="address.state" >Scout's State</label>
+                                <input type="text" name="address.state" class="form-control"/>
+                            </div>
+                            <div class="form-group">
+                                <label for="address.zipCode" >Scout's Zipcode</label>
+                                <input type="text" name="address.zipCode" class="form-control"/>
+                            </div>
+                        </fieldset>
+                        
+                </div>
+                <div class="col-sm-6">
+                            <!--birthday-->
+                        <div class="form-group">
+                            <label for="birthday.date" >Scout's Birthday</label>
+                            <input type="text" name="birthday.date" class="form-control"/>
+                        </div>
+                        
+                        <!--den-->
+                        <div class="form-group">
+                            <label for="den" >Scout's Den</label>
+                            <input type="text" name="den" class="form-control"/>
+                        </div>
+               
+                <!--true false-->
+                        <!--pictures-->
+                        <fieldset>
+                            <legend>Yes or No</legend>
+                            <div class="form-group">
+                                <p><strong>Allow Photos?</strong></p>
+                                <label class="radio-inline">
+                                    <input type="radio" name="picturesAllowed"  value="true" >
+                                    Allowed
+                                </label>
+                                <label class="radio-inline">
+                                    <input type="radio" name="picturesAllowed"  value="false" >
+                                    Not allowed
+                                </label>
+                            </div>
+                            
+                            <!--dues paid-->
+                            <div class="form-group">
+                                <p>Have Dues been paid?</p>
+                                <label class="radio-inline">
+                                    <input type="radio" name="dues"  value="true" >
+                                    Paid
+                                </label>
+                                <label class="radio-inline">
+                                    <input type="radio" name="dues"  value="false" >
+                                    Unpaid
+                                </label>
+                            </div>
+                            
+                            <!--recieved book-->
+                            <div class="form-group">
+                                <p>Recieved a Book?</p>
+                                <label class="radio-inline">
+                                    <input type="radio" name="book"  value="true" >
+                                    Yes
+                                </label>
+                                <label class="radio-inline">
+                                    <input type="radio" name="book"  value="false" >
+                                    No
+                                </label>
+                            </div>
+                            
+                            <!-- boat -->
+                            <div class="form-group">
+                                <p>Recieved a Boat?</p>
+                                <label class="radio-inline">
+                                    <input type="radio" name="boat"  value="true" >
+                                    Yes
+                                </label>
+                                <label class="radio-inline">
+                                    <input type="radio" name="boat"  value="false" >
+                                    No
+                                </label>
+                            </div>
+                            
+                            <!--car-->
+                            <div class="form-group">
+                                <p>Recieved a Car?</p>
+                                <label class="radio-inline">
+                                    <input type="radio" name="car"  value="true" >
+                                    Yes
+                                </label>
+                                <label class="radio-inline">
+                                    <input type="radio" name="car"  value="false" >
+                                    No
+                                </label>
+                            </div>
+                        </fieldset>
+                        
+                        <!--notes-->
+                        <div class="form-group">
+                            <label for="notes">Notes:</label>
+                            <textarea class="form-control" name="notes" rows="3"></textarea>
+                        </div>
+                        
+                        
+                </div>
+    
+                    
+            </div> 
+            <div class="row">
+                <div class="col-sm-6">
+                    <fieldset>
+                        <legend>Parent 1</legend>
+                         <!--parent1 name-->
+                        <div class="form-group">
+                            <label for="parent1.name.first" >First Name</label>
+                            <input type="text" name="parent1.name.first" class="form-control"/>
+                        </div>
+                        <div class="form-group">
+                            <label for="parent1.name.last" >Last Name</label>
+                            <input type="text" name="parent1.name.last" class="form-control"/>
+                        </div>
+                        
+                        <!--relation-->
+                        <div class="form-group">
+                            <label for="parent1.relationToScout" >Relation to Scout</label>
+                            <input type="text" name="parent1.relationToScout" class="form-control"/>
+                        </div>
+                        
+                        <!--address-->
+                        <div class="form-group">
+                            <p>Address same as scout?</p>
+                            <label class="radio-inline">
+                                <input type="radio" name="parent1.address.sameAsScout"  value="true" >
+                                Yes
+                            </label>
+                            <label class="radio-inline">
+                                <input type="radio" name="parent1.address.sameAsScout"  value="false" >
+                                No
+                            </label>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="parent1.address.street" >Street Address</label>
+                            <input type="text" name="parent1.address.street" class="form-control"/>
+                        </div>
+                        <div class="form-group">
+                            <label for="parent1.address.mail" >Mailing Address</label>
+                            <input type="text" name="parent1.address.mail" class="form-control"/>
+                        </div>
+                        <div class="form-group">
+                            <label for="parent1.address.city" >City</label>
+                            <input type="text" name="parent1.address.city" class="form-control"/>
+                        </div>
+                        <div class="form-group">
+                            <label for="parent1.address.state" >State</label>
+                            <input type="text" name="parent1.address.state" class="form-control"/>
+                        </div>
+                        <div class="form-group">
+                            <label for="parent1.address.zipCode" >Zipcode</label>
+                            <input type="text" name="parent1.address.zipCode" class="form-control"/>
+                        </div>
+                        
+                        <!--phone numbers-->
+                        <div class="form-group">
+                            <label for="parent1.phoneNumberMobile" >Mobile Number</label>
+                            <input type="text" name="parent1.phoneNumberMobile" class="form-control"/>
+                        </div>
+                        <div class="form-group">
+                            <label for="parent1.phoneNumberHome" >Home Number</label>
+                            <input type="text" name="parent1.phoneNumberHome" class="form-control"/>
+                        </div>
+                        <div class="form-group">
+                            <label for="parent1.phoneNumberWork" >Work Number</label>
+                            <input type="text" name="parent1.phoneNumberWork" class="form-control"/>
+                        </div>
+                        
+                         <!--notes-->
+                        <div class="form-group">
+                            <label for="parent1.notes">Notes:</label>
+                            <textarea class="form-control" name="parent1.notes" rows="3"></textarea>
+                        </div>
+                        
+                    </fieldset>
+                    
+                </div>
+
+                <div class="col-sm-6">
+                    <fieldset>
+                        <legend>Parent 2</legend>
+                         <!--parent1 name-->
+                        <div class="form-group">
+                            <label for="parent2.name.first" >First Name</label>
+                            <input type="text" name="parent2.name.first" class="form-control"/>
+                        </div>
+                        <div class="form-group">
+                            <label for="parent2.name.last" >Last Name</label>
+                            <input type="text" name="parent2.name.last" class="form-control"/>
+                        </div>
+                        
+                        <!--relation-->
+                        <div class="form-group">
+                            <label for="parent2.relationToScout" >Relation to Scout</label>
+                            <input type="text" name="parent2.relationToScout" class="form-control"/>
+                        </div>
+                        
+                        <!--address-->
+                        <div class="form-group">
+                            <p>Address same as scout?</p>
+                            <label class="radio-inline">
+                                <input type="radio" name="parent2.address.sameAsScout"  value="true" >
+                                Yes
+                            </label>
+                            <label class="radio-inline">
+                                <input type="radio" name="parent2.address.sameAsScout"  value="false" >
+                                No
+                            </label>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="parent2.address.street" >Street Address</label>
+                            <input type="text" name="parent2.address.street" class="form-control"/>
+                        </div>
+                        <div class="form-group">
+                            <label for="parent2.address.mail" >Mailing Address</label>
+                            <input type="text" name="parent2.address.mail" class="form-control"/>
+                        </div>
+                        <div class="form-group">
+                            <label for="parent2.address.city" >City</label>
+                            <input type="text" name="parent2.address.city" class="form-control"/>
+                        </div>
+                        <div class="form-group">
+                            <label for="parent2.address.state" >State</label>
+                            <input type="text" name="parent2.address.state" class="form-control"/>
+                        </div>
+                        <div class="form-group">
+                            <label for="parent2.address.zipCode" >Zipcode</label>
+                            <input type="text" name="parent2.address.zipCode" class="form-control"/>
+                        </div>
+                        
+                        <!--phone numbers-->
+                        <div class="form-group">
+                            <label for="parent2.phoneNumberMobile" >Mobile Number</label>
+                            <input type="text" name="parent2.phoneNumberMobile" class="form-control"/>
+                        </div>
+                        <div class="form-group">
+                            <label for="parent2.phoneNumberHome" >Home Number</label>
+                            <input type="text" name="parent2.phoneNumberHome" class="form-control"/>
+                        </div>
+                        <div class="form-group">
+                            <label for="parent2.phoneNumberWork" >Work Number</label>
+                            <input type="text" name="parent2.phoneNumberWork" class="form-control"/>
+                        </div>
+                        
+                         <!--notes-->
+                        <div class="form-group">
+                            <label for="parent2.notes">Notes:</label>
+                            <textarea class="form-control" name="parent2.notes" rows="3"></textarea>
+                        </div>
+                        
+                    </fieldset>
+                </div>
+            </div>
+            
+            <input type="submit" value="Submit" class="btn btn-primary" />
+            
+        </form>
+    </div>
+        
+    </div>
+    
+    
+    
+    <script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+  </body>
+</html>

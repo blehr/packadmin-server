@@ -3,8 +3,8 @@ const scoutController = (Scout) => {
     const query = Scout.find();
 
     query.exec((err, results) => {
-      if (err) { console.log(err); }
-      res.json(results);
+      if (err) { res.status(422).send(err); }
+      res.status(200).json(results);
     });
   };
 
@@ -13,9 +13,9 @@ const scoutController = (Scout) => {
 
     scout.save((err) => {
       if (err) {
-        res.json(err);
+        res.status(422).send(err);
       } else {
-        res.json(scout);
+        res.status(201).json(scout);
       }
     });
   };
@@ -34,9 +34,9 @@ const scoutController = (Scout) => {
 
       scout.save((error) => {
         if (error) {
-          res.json(error);
+          res.status(422).send(error);
         } else {
-          res.json(scout);
+          res.status(201).json(scout);
         }
       });
     });
@@ -44,8 +44,8 @@ const scoutController = (Scout) => {
 
   const findById = (req, res) => {
     Scout.findById(req.params.id, (err, scout) => {
-      if (err) { console.log(err); }
-      res.json(scout);
+      if (err) { res.status(422).send(err); }
+      res.status(200).json(scout);
     });
   };
 
@@ -53,8 +53,8 @@ const scoutController = (Scout) => {
     const query = Scout.find({ _id: req.params.id });
 
     query.remove((err, results) => {
-      if (err) { console.log(err); }
-      res.json(results);
+      if (err) { res.status(422).send(err); }
+      res.status(200).json(results);
     });
   };
 

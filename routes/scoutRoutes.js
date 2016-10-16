@@ -4,20 +4,16 @@ const routes = function routes(Scout) {
   const scoutRouter = express.Router();
   const scoutController = require('../controllers/scout.server.controller')(Scout);
 
-  scoutRouter.route('/scouts')
+  scoutRouter.route('/')
       .get(scoutController.getAll);
 
-  scoutRouter.route('/scouts/add')
+  scoutRouter.route('/add')
       .post(scoutController.addScout);
 
-  scoutRouter.route('/scouts/update/:id')
-      .post(scoutController.updateScout);
-
-  scoutRouter.route('/scouts/detail/:id')
-      .get(scoutController.findById);
-
-  scoutRouter.route('/scouts/remove/:id')
-      .post(scoutController.removeById);
+  scoutRouter.route('/detail/:id')
+      .get(scoutController.findById)
+      .put(scoutController.updateScout)
+      .delete(scoutController.removeById);
 
   return scoutRouter;
 };

@@ -9,6 +9,8 @@ const scoutController = (Scout) => {
   };
 
   const addScout = (req, res) => {
+    console.log(req.user);
+    req.body.data.owner = req.user._id;
     const scout = new Scout(req.body.data);
 
     scout.save((err) => {

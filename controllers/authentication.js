@@ -4,7 +4,6 @@ const config = require('../config');
 
 
 const authController = (User) => {
-
   // create token
   function tokenForUser(user) {
     const timestamp = new Date().getTime();
@@ -18,8 +17,10 @@ const authController = (User) => {
   };
 
   const signup = (req, res, next) => {
-    const email = req.body.email;
-    const password = req.body.password;
+    const email = req.body.data.email;
+    const password = req.body.data.password;
+    const packNumber = req.body.data.packNumber;
+    const name = req.body.data.name;
 
     if (!email || !password) {
       return res.status(422).send({ error: 'You must provide email and password' });
@@ -31,17 +32,19 @@ const authController = (User) => {
 
       // if a user does exist, return an error
       if (existingUser) {
-        return res.status(422).send({ error: 'Email is in use' });
+        return res.status(422).send({ error: 'An account already exists for this email' });
       }
 
       // if a user with email does not exist, create and save user record
       const user = new User({
         email,
         password,
+        packNumber,
+        name,
       });
 
-      user.save((err) => {
-        if (err) { return next(err); }
+      user.save((error) => {
+        if (error) { return next(error); }
 
         // respond to request indicating the user was created
         res.json({ token: tokenForUser(user) });

@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const scoutSchema = new Schema({
-  // owner: Schema.Types.ObjectId,
+  owner: { type: Schema.Types.ObjectId, required: true },
   scoutFirstName: { type: String, required: true },
   scoutLastName: { type: String, required: true },
   scoutStreetAddress: { type: String },

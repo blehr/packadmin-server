@@ -1,19 +1,23 @@
 const express = require('express');
+const passport = require('passport');
+const passportService = require('../services/passport');
+
+const requireAuth = passport.authenticate('jwt', { session: false });
 
 const routes = function routes(Scout) {
   const scoutRouter = express.Router();
   const scoutController = require('../controllers/scout.server.controller')(Scout);
 
   scoutRouter.route('/')
-      .get(scoutController.getAll);
+      .get(requireAuth, scoutController.getAll);
 
   scoutRouter.route('/add')
-      .post(scoutController.addScout);
+      .post(requireAuth, scoutController.addScout);
 
   scoutRouter.route('/detail/:id')
-      .get(scoutController.findById)
-      .put(scoutController.updateScout)
-      .delete(scoutController.removeById);
+      .get(requireAuth, scoutController.findById)
+      .put(requireAuth, scoutController.updateScout)
+      .delete(requireAuth, scoutController.removeById);
 
   return scoutRouter;
 };

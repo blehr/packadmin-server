@@ -2,10 +2,10 @@ const express = require('express');
 const passport = require('passport');
 const passportService = require('../services/passport');
 
+const scoutRouter = express.Router();
 const requireAuth = passport.authenticate('jwt', { session: false });
 
 const routes = function routes(Scout) {
-  const scoutRouter = express.Router();
   const scoutController = require('../controllers/scout.server.controller')(Scout);
 
   scoutRouter.route('/')

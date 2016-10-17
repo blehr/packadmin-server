@@ -1,6 +1,6 @@
 const scoutController = (Scout) => {
   const getAll = (req, res) => {
-    const query = Scout.find();
+    const query = Scout.find({ owner: req.user._id });
 
     query.exec((err, results) => {
       if (err) { res.status(422).send(err); }
@@ -9,7 +9,6 @@ const scoutController = (Scout) => {
   };
 
   const addScout = (req, res) => {
-    console.log(req.user);
     req.body.data.owner = req.user._id;
     const scout = new Scout(req.body.data);
 

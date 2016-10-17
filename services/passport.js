@@ -39,7 +39,7 @@ const jwtLogin = new JwtStrategy(jwtOptions, (payload, done) => {
   // if it does call 'done' with that user
   // otherwise call done without a user object
   User.findById(payload.sub, (err, user) => {
-    if (err) { return done(err, false); }
+    if (err) { return done(err, false, { message: 'Are You Logged In?' }); }
 
     if (user) {
       done(null, user);

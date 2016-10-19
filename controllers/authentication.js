@@ -51,10 +51,33 @@ const authController = (User) => {
       });
     });
   };
+  
+  const fetchProfile = (req, res, next) => {
+    User.findById(req.user._id, (err, user) => {
+       if (err) { return next(err); }
+       const userProfile = {};
+       userProfile.name = user.name;
+       userProfile.packNumber = user.packNumber;
+       res.status(200).json(userProfile);
+    });
+  };
+  
+  const updateProfile = (req, res, next) => {
+    User.findByIdAndUpdate(req.user._id, req.body, { new: true }, (err, user) => {
+       if (err) { res.status(422).send(err); }
+        const userProfile = {};
+       userProfile.name = user.name;
+       userProfile.packNumber = user.packNumber;
+       res.status(201).json(userProfile);
+      
+    });
+  };
 
   return {
     signin,
     signup,
+    fetchProfile,
+    updateProfile,
   };
 };
 

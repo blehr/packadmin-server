@@ -27,7 +27,7 @@ const authController = (User) => {
     }
 
     // see if a user with given email exist
-    User.findOne({ email: email }, (err, existingUser) => {
+    User.findOne({ email }, (err, existingUser) => {
       if (err) { return next(err); }
 
       // if a user does exist, return an error
@@ -51,25 +51,24 @@ const authController = (User) => {
       });
     });
   };
-  
+
   const fetchProfile = (req, res, next) => {
     User.findById(req.user._id, (err, user) => {
-       if (err) { return next(err); }
-       const userProfile = {};
-       userProfile.name = user.name;
-       userProfile.packNumber = user.packNumber;
-       res.status(200).json(userProfile);
+      if (err) { return next(err); }
+      const userProfile = {};
+      userProfile.name = user.name;
+      userProfile.packNumber = user.packNumber;
+      res.status(200).json(userProfile);
     });
   };
-  
+
   const updateProfile = (req, res, next) => {
     User.findByIdAndUpdate(req.user._id, req.body, { new: true }, (err, user) => {
-       if (err) { res.status(422).send(err); }
-        const userProfile = {};
-       userProfile.name = user.name;
-       userProfile.packNumber = user.packNumber;
-       res.status(201).json(userProfile);
-      
+      if (err) { res.status(422).send(err); }
+      const userProfile = {};
+      userProfile.name = user.name;
+      userProfile.packNumber = user.packNumber;
+      res.status(201).json(userProfile);
     });
   };
 

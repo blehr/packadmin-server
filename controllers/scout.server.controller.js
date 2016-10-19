@@ -1,9 +1,17 @@
 const scoutController = (Scout) => {
   const getAll = (req, res) => {
     const query = Scout.find({ owner: req.user._id });
-
+    // const user = req.user;
     query.exec((err, results) => {
       if (err) { res.status(422).send(err); }
+      const user = {};
+      user.user = {};
+      user.user.name = req.user.name;
+      user.user.packNumber = req.user.packNumber;
+      results.push(user);
+
+      console.log(results);
+
       res.status(200).json(results);
     });
   };

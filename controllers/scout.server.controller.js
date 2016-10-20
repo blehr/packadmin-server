@@ -1,53 +1,43 @@
 const scoutController = (Scout) => {
   const getAll = (req, res) => {
     const query = Scout.find({ owner: req.user._id });
-    // const user = req.user;
     query.exec((err, results) => {
       if (err) { res.status(422).send(err); }
       const user = {};
-      user.user = {};
-      user.user.name = req.user.name;
-      user.user.packNumber = req.user.packNumber;
-      results.push(user);
+      user.name = req.user.name;
+      user.packNumber = req.user.packNumber;
 
-      console.log(results);
-
-      res.status(200).json(results);
+      res.status(200).json({ scouts: results, user });
     });
   };
 
   const addScout = (req, res) => {
     req.body.data.owner = req.user._id;
     const scout = new Scout(req.body.data);
+    
+    const user = {};
+    user.name = req.user.name;
+    user.packNumber = req.user.packNumber;
 
     scout.save((err) => {
       if (err) {
         res.status(422).send(err);
       } else {
-        res.status(201).json(scout);
+        res.status(201).json({ scout: scout, user });
       }
     });
   };
 
 
   const updateScout = (req, res) => {
-    Scout.findById(req.params.id, (err, scout) => {
-      if (err) { res.send(err); }
-      const updateData = req.body.data;
-
-      for (const prop in updateData) {
-        if (prop !== '_id') {
-          scout[prop] = updateData[prop];
-        }
-      }
-
-      scout.save((error) => {
-        if (error) {
-          res.status(422).send(error);
-        } else {
-          res.status(201).json(scout);
-        }
-      });
+    const options = {
+      new: true,
+      upsert: true,
+    };
+    
+    Scout.findByIdAndUpdate(req.params.id, req.body.data, options, (err, scout) => {
+      if (err) { res.status(422).send(err); }
+      res.status(201).json(scout);
     });
   };
 
@@ -59,11 +49,9 @@ const scoutController = (Scout) => {
   };
 
   const removeById = (req, res) => {
-    const query = Scout.find({ _id: req.params.id });
-
-    query.remove((err, results) => {
+   Scout.findByIdAndRemove(req.params.id, (err, scout) => {
       if (err) { res.status(422).send(err); }
-      res.status(200).json(results);
+      res.status(201).json(scout);
     });
   };
 

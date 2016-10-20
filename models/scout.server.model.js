@@ -33,6 +33,7 @@ const scoutSchema = new Schema({
   parent1PhoneNumberMobile: { type: String },
   parent1PhoneNumberHome: { type: String },
   parent1PhoneNumberWork: { type: String },
+  parent1Email: { type: String },
   parent1Notes: { type: String },
   parent2FirstName: { type: String },
   parent2LastName: { type: String },
@@ -46,10 +47,9 @@ const scoutSchema = new Schema({
   parent2PhoneNumberMobile: { type: String },
   parent2PhoneNumberHome: { type: String },
   parent2PhoneNumberWork: { type: String },
+  parent2Email: { type: String },
   parent2Notes: { type: String },
 });
-
-// post hook calc age from bday
 
 
 module.exports = mongoose.model('Scout', scoutSchema);

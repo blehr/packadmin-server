@@ -3,11 +3,8 @@ const scoutController = (Scout) => {
     const query = Scout.find({ owner: req.user._id });
     query.exec((err, results) => {
       if (err) { res.status(422).send(err); }
-      const user = {};
-      user.name = req.user.name;
-      user.packNumber = req.user.packNumber;
-
-      res.status(200).json({ scouts: results, user });
+      
+      res.status(200).json({ scouts: results });
     });
   };
 
@@ -15,15 +12,11 @@ const scoutController = (Scout) => {
     req.body.data.owner = req.user._id;
     const scout = new Scout(req.body.data);
     
-    const user = {};
-    user.name = req.user.name;
-    user.packNumber = req.user.packNumber;
-
     scout.save((err) => {
       if (err) {
         res.status(422).send(err);
       } else {
-        res.status(201).json({ scout: scout, user });
+        res.status(201).json({ scout: scout });
       }
     });
   };

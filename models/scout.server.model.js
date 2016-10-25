@@ -2,8 +2,21 @@ const mongoose = require('mongoose');
 
 const Schema = mongoose.Schema;
 
+const Bobcat = require('./bobcat.server.model');
+const Lion = require('./lion.server.model');
+const Tiger = require('./tiger.server.model');
+const Wolf = require('./wolf.server.model');
+const Bear = require('./bear.server.model');
+const Webelos = require('./webelos.server.model');
+
 const scoutSchema = new Schema({
   owner: { type: Schema.Types.ObjectId, required: true },
+  lion: Lion,
+  bobcat: Bobcat,
+  tiger: Tiger,
+  wolf: Wolf,
+  bear: Bear,
+  webelos: Webelos,
   scoutFirstName: { type: String, required: true },
   scoutLastName: { type: String, required: true },
   scoutStreetAddress: { type: String },

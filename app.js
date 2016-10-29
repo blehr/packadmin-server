@@ -14,21 +14,9 @@ mongoose.connect(`mongodb://${host}/scoutAdmin`);
 
 const Scout = require('./models/scout.server.model'); // the model
 const User = require('./models/users.server.model');
-// const Bobcat = require('./models/bobcat.server.model');
-// const Lion = require('./models/lion.server.model');
-// const Tiger = require('./models/tiger.server.model');
-// const Wolf = require('./models/wolf.server.model');
-// const Bear = require('./models/bear.server.model');
-// const Webelos = require('./models/webelos.server.model');
 
 const scoutRouter = require('./routes/scoutRoutes')(Scout); // pass model into routes
 const users = require('./routes/users')(User);
-// const bobcatRouter = require('./routes/bobcatRoutes')(Bobcat);
-// const lionRouter = require('./routes/lionRoutes')(Lion);
-// const tigerRouter = require('./routes/tigerRoutes')(Tiger);
-// const wolfRouter = require('./routes/wolfRoutes')(Wolf);
-// const bearRouter = require('./routes/bearRoutes')(Bear);
-// const webelosRouter = require('./routes/webelosRoutes')(Webelos);
 
 const app = express();
 app.options('*', cors()); // include before other routes
@@ -46,16 +34,17 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, 'client/dist')));
 app.use(flash());
 
 app.use('/scouts', scoutRouter);
 app.use('/users', users);
-// app.use('/bobcat', bobcatRouter);
-// app.use('/lion', lionRouter);
-// app.use('/tiger', tigerRouter);
-// app.use('/wolf', wolfRouter);
-// app.use('/bear', bearRouter);
-// app.use('/webelos', webelosRouter);
+
+app.get('/*', (req, res) => {
+  res.sendFile(path.join(__dirname, '/client/dist/index.html'));
+});
+
+// node bin/www env NODE_ENV=production this start production
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {

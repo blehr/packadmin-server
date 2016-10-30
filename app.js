@@ -14,9 +14,11 @@ mongoose.connect(`mongodb://${host}/scoutAdmin`);
 
 const Scout = require('./models/scout.server.model'); // the model
 const User = require('./models/users.server.model');
+const Leader = require('./models/leader.server.model');
 
 const scoutRouter = require('./routes/scoutRoutes')(Scout); // pass model into routes
 const users = require('./routes/users')(User);
+const leaderRouter = require('./routes/leaderRoutes')(Leader);
 
 const app = express();
 app.options('*', cors()); // include before other routes
@@ -39,6 +41,7 @@ app.use(flash());
 
 app.use('/scouts', scoutRouter);
 app.use('/users', users);
+app.use('/leader', leaderRouter);
 
 app.get('/*', (req, res) => {
   res.sendFile(path.join(__dirname, '/client/dist/index.html'));

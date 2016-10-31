@@ -41,7 +41,7 @@ app.use(flash());
 
 app.use('/scouts', scoutRouter);
 app.use('/users', users);
-app.use('/leader', leaderRouter);
+app.use('/leaders', leaderRouter);
 
 app.get('/*', (req, res) => {
   res.sendFile(path.join(__dirname, '/client/dist/index.html'));

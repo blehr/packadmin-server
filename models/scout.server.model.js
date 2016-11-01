@@ -11,6 +11,7 @@ const Webelos = require('./webelos.server.model');
 
 const scoutSchema = new Schema({
   owner: { type: Schema.Types.ObjectId, required: true },
+  pack: { type: String },
   lion: Lion,
   bobcat: Bobcat,
   tiger: Tiger,

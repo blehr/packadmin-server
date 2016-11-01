@@ -4,15 +4,22 @@
  * Module dependencies.
  */
 
+const fs = require('fs');
+
 const app = require('../app');
 const debug = require('debug')('workspace:server');
-const http = require('http');
+const https = require('https');
 
 /**
  * Create HTTP server.
  */
+const options = {
+  key: fs.readFileSync('ssl.key'),
+  cert: fs.readFileSync('ssl.crt'),
+};
 
-const server = http.createServer(app);
+
+const server = https.createServer(options, app);
 
 
 /**

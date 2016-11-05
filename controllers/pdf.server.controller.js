@@ -1,15 +1,20 @@
-const React = require('react');
-const ReactDOMServer = rerquire('react-dom/server');
-const pdf = rerquire('html-pdf');
-const fs = rerquire('fs');
+const pdf = require('html-pdf');
+const fs = require('fs');
+
+const pdfController = () => {
+  const createPdf = (req, res) => {
+    console.log(req.body.data);
+    const html = req.body.data;
+    pdf.create(html).toStream((err, stream) => {
+      console.log(stream);
+      stream.pipe(res);
+    });
+  };
+
+  return {
+    createPdf,
+  };
+};
 
 
-const createPdf = (file, path) => {
-  const html = ReactDOMServer.renderToString(file);
-  pdf.create(html).toFile([filepath, ](err, res) => {
-    console.log(res.filename);
-  });
-
-}
-
-module.exports = createPdf;
+module.exports = pdfController;

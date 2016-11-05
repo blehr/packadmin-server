@@ -19,6 +19,7 @@ const Leader = require('./models/leader.server.model');
 const scoutRouter = require('./routes/scoutRoutes')(Scout); // pass model into routes
 const users = require('./routes/users')(User);
 const leaderRouter = require('./routes/leaderRoutes')(Leader);
+const pdfRouter = require('./routes/pdfRoutes')();
 
 const app = express();
 app.options('*', cors()); // include before other routes
@@ -42,6 +43,7 @@ app.use(flash());
 app.use('/scouts', scoutRouter);
 app.use('/users', users);
 app.use('/leaders', leaderRouter);
+app.use('/pdf', pdfRouter);
 
 app.get('/*', (req, res) => {
   res.sendFile(path.join(__dirname, '/client/dist/index.html'));

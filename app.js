@@ -20,6 +20,7 @@ const scoutRouter = require('./routes/scoutRoutes')(Scout); // pass model into r
 const users = require('./routes/users')(User);
 const leaderRouter = require('./routes/leaderRoutes')(Leader);
 const pdfRouter = require('./routes/pdfRoutes')();
+const downloadRouter = require('./routes/downloadRoutes')();
 
 const app = express();
 app.options('*', cors()); // include before other routes
@@ -44,6 +45,7 @@ app.use('/scouts', scoutRouter);
 app.use('/users', users);
 app.use('/leaders', leaderRouter);
 app.use('/pdf', pdfRouter);
+app.use('/download', downloadRouter);
 
 app.get('/*', (req, res) => {
   res.sendFile(path.join(__dirname, '/client/dist/index.html'));

@@ -3,7 +3,9 @@ const passport = require('passport');
 const passportService = require('../services/passport');
 
 
-const requireAuth = passport.authenticate('jwt', { session: false });
+const requireAuth = passport.authenticate('jwt',
+  { session: false,
+    failureRedirect: '/' });
 const requireSignin = passport.authenticate('local', { session: false });
 
 const routes = function routes(User) {

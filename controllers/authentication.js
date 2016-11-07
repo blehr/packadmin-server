@@ -1,6 +1,5 @@
 const jwt = require('jwt-simple');
 const config = require('../config');
-// const User = require('../models/users.server.model');
 
 
 const authController = (User) => {

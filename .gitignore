@@ -5,5 +5,3 @@ dist
 coverage
 .idea
 config.js
-ssl.cert
-ssl.key

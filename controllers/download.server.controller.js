@@ -10,8 +10,6 @@ const downloadController = () => {
     stream.on('close', () => {
       fs.unlink(filePath);
     });
-
-    console.log('filepath', filePath);
   };
 
   return {

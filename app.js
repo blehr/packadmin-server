@@ -37,15 +37,14 @@ app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
-// app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.static(path.join(__dirname, 'client/dist')));
 app.use(flash());
 
-app.use('/scouts', scoutRouter);
-app.use('/users', users);
-app.use('/leaders', leaderRouter);
-app.use('/pdf', pdfRouter);
-app.use('/download', downloadRouter);
+app.use('/api/scouts', scoutRouter);
+app.use('/api/users', users);
+app.use('/api/leaders', leaderRouter);
+app.use('/api/pdf', pdfRouter);
+app.use('/api/download', downloadRouter);
 
 app.get('/*', (req, res) => {
   res.sendFile(path.join(__dirname, '/client/dist/index.html'));

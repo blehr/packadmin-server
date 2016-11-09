@@ -50,8 +50,6 @@ app.get('/*', (req, res) => {
   res.sendFile(path.join(__dirname, '/client/dist/index.html'));
 });
 
-// node bin/www env NODE_ENV=production this start production
-
 // catch 404 and forward to error handler
 app.use((req, res, next) => {
   const err = new Error('Not Found');

@@ -13,6 +13,8 @@ const userSchema = new Schema({
   password: String,
   packNumber: String,
   name: String,
+  resetToken: String,
+  resetTokenExpires: Date,
 });
 
 // on save hook, encrypt password

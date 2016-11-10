@@ -5,12 +5,12 @@ const routes = function routes(User) {
   const resetPasswordController = require('../controllers/reset_password')(User);
 
   resetPasswordRouter.route('/request')
-    .get(resetPasswordController.fetchProfile)
-    .post(resetPasswordController.updateProfile);
+    // .get(resetPasswordController.fetchProfile)
+    .post(resetPasswordController.initiateReset);
 
-  resetPasswordRouter.route('reset')
-    .get(resetPasswordController)
-    .post(resetPasswordController);
+  resetPasswordRouter.route('/reset')
+    // .get(resetPasswordController)
+    .post(resetPasswordController.checkAndSave);
 
   return resetPasswordRouter;
 };

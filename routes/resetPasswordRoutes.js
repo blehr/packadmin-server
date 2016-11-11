@@ -4,11 +4,10 @@ const routes = function routes(User) {
   const resetPasswordRouter = express.Router();
   const resetPasswordController = require('../controllers/reset_password')(User);
 
-  resetPasswordRouter.route('/request')
-    // .get(resetPasswordController.fetchProfile)
+  resetPasswordRouter.route('/')
     .post(resetPasswordController.initiateReset);
 
-  resetPasswordRouter.route('/reset')
+  resetPasswordRouter.route('/reset/:token')
     // .get(resetPasswordController)
     .post(resetPasswordController.checkAndSave);
 

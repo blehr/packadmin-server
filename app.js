@@ -22,6 +22,7 @@ const users = require('./routes/users')(User);
 const leaderRouter = require('./routes/leaderRoutes')(Leader);
 const pdfRouter = require('./routes/pdfRoutes')();
 const downloadRouter = require('./routes/downloadRoutes')();
+const resetPasswordRouter = require('./routes/resetPasswordRoutes')(User);
 
 const app = express();
 app.options('*', cors()); // include before other routes
@@ -45,6 +46,7 @@ app.use('/users', users);
 app.use('/leaders', leaderRouter);
 app.use('/pdf', pdfRouter);
 app.use('/download', downloadRouter);
+app.use('/password', resetPasswordRouter);
 
 app.get('/*', (req, res) => {
   res.sendFile(path.join(__dirname, '/client/dist/index.html'));

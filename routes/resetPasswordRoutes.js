@@ -8,8 +8,10 @@ const routes = function routes(User) {
     .post(resetPasswordController.initiateReset);
 
   resetPasswordRouter.route('/reset/:token')
-    // .get(resetPasswordController)
     .post(resetPasswordController.checkAndSave);
+
+  resetPasswordRouter.route('/submit/:token')
+    .post(resetPasswordController.submitNewPassword);
 
   return resetPasswordRouter;
 };

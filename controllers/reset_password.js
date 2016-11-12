@@ -10,6 +10,10 @@ const auth = {
   },
 };
 
+const ROOT_URL = 'http://express-project-brandonl.c9users.io:8081/reset/';
+// const ROOT_URL = 'http://localhost/reset/';
+// const ROOT_URL = 'https://packadmin.com/reset/';
+
 const nodemailerMailgun = nodemailer.createTransport(mg(auth));
 
 const resetPasswordController = (User) => {
@@ -27,37 +31,35 @@ const resetPasswordController = (User) => {
       if (err) { return next(err); }
 
       if (!user) {
-        return res.status(422).send({ error: 'No account with that email address exists.' });
+        res.json({ success: false, error: 'No account with that email address exists.' });
       }
+      if (user) {
+        user.resetToken = createToken(user);
 
-      user.resetToken = createToken(user);
-
-      user.save((error) => {
-        if (error) { return next(error); }
-
-        // express-project-brandonl.c9users.io:8081/reset/
-        nodemailerMailgun.sendMail({
-          from: 'admin@packadmin.com',
-          to: user.email,
-          subject: 'Pack Admin password reset',
-          html: `<h1>The Pack Admin</h1>
-            <h3>The Cub Master's Secret</h3><br>
-            <p>To reset your your password, just click the link below to enter your new password.</p>
-            <p>This link will be valid for 1 hour.</p>
-            <a href="http://localhost:8081/reset/${user.resetToken}" >Reset Password</a>
-            <h4>Thank You for using the Pack Admin!</h4>
-            <p>For managing Pinewood Derby and Rain Gutter Regatta Races, checkout <a href="http://pinewoodraceday.com">PinewoodRaceDay.com</a></p>`,
-        }, (err, info) => {
-          if (err) {
-            console.log('Error: ', err);
-            res.status(500).json({ success: false });
-          }
-          else {
-            console.log('Response: ', info);
-            res.status(201).json({ success: true });
-          }
+        user.save((error) => {
+          if (error) { return next(error); }
+  
+          nodemailerMailgun.sendMail({
+            from: 'admin@packadmin.com',
+            to: user.email,
+            subject: 'Pack Admin password reset',
+            html: `<h1>The Pack Admin</h1>
+              <h3>The Cub Master's Secret</h3><br>
+              <p>To reset your your password, just click the link below to enter your new password.</p>
+              <p>This link will be valid for 1 hour.</p>
+              <a href="${ROOT_URL}${user.resetToken}" >Reset Password</a>
+              <h4>Thank You for using The Pack Admin!</h4>
+              <p>For managing Pinewood Derby and Rain Gutter Regatta Races, checkout <a href="http://pinewoodraceday.com">PinewoodRaceDay.com</a></p>`,
+          }, (err, info) => {
+            if (err) {
+              res.status(500).json({ success: false });
+            }
+            else {
+              res.status(201).json({ success: true });
+            }
+          });
         });
-      });
+      }
     });
   };
 
@@ -107,21 +109,18 @@ const resetPasswordController = (User) => {
           nodemailerMailgun.sendMail({
             from: 'admin@packadmin.com',
             to: user.email,
-            subject: 'Pack Admin password reset successfull',
+            subject: 'Pack Admin password reset successful',
             html: `<h1>The Pack Admin</h1>
               <h3>The Cub Master's Secret</h3><br>
               <p>Your password has been successfully reset!</p>
-              <p>This link will be valid for 1 hour.</p>
               <a href="https://packadmin.com">The Pack Admin</a>
-              <h4>Thank You for using the Pack Admin!</h4>
+              <h4>Thank You for using The Pack Admin!</h4>
               <p>For managing Pinewood Derby and Rain Gutter Regatta Races, checkout <a href="http://pinewoodraceday.com">PinewoodRaceDay.com</a></p>`,
           }, (err, info) => {
             if (err) {
-              console.log('Error: ', err);
               res.status(200).json({ success: false, msg: 'password reset unsuccessful' });
             }
             else {
-              console.log('Response: ', info);
               res.status(200).json({ success: true, msg: 'password reset' });
             }
           });

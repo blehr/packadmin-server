@@ -8,6 +8,7 @@
     "eslint": "eslint ."
   },
   "dependencies": {
+    "aws-sdk": "^2.7.0",
     "bcrypt-nodejs": "0.0.3",
     "body-parser": "~1.15.1",
     "connect-flash": "^0.1.1",

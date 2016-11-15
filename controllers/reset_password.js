@@ -11,7 +11,7 @@ const auth = {
 };
 
 // const ROOT_URL = 'http://express-project-brandonl.c9users.io:8081/reset/';
-// const ROOT_URL = 'http://localhost/reset/';
+// const ROOT_URL = 'http://localhost:8080/reset/';
 const ROOT_URL = 'https://packadmin.com/reset/';
 
 const nodemailerMailgun = nodemailer.createTransport(mg(auth));

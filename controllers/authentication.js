@@ -62,7 +62,10 @@ const authController = (User) => {
   };
 
   const updateProfile = (req, res, next) => {
-    User.findByIdAndUpdate(req.user._id, req.body, { new: true }, (err, user) => {
+    const newProfile = {};
+    newProfile.name = req.body.name;
+    newProfile.packNumber = req.body.packNumber;
+    User.findByIdAndUpdate(req.user._id, newProfile, { new: true }, (err, user) => {
       if (err) { res.status(422).send(err); }
       const userProfile = {};
       userProfile.name = user.name;

@@ -13,6 +13,7 @@
 9. `cd ..`
 10. `npm install` dependencies
 11. check for proper link in containers/reset-password.js `const ROOT_URL = 'https://packadmin.com/reset/';`
+12. edit config.js secret
 12. `pm2 start startup.config.js`
 13. `pm2 startup` to create startup script
 14. `pm2 sav`e to save it

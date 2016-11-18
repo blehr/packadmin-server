@@ -17,6 +17,9 @@ const routes = function routes(User) {
   userRouter.route('/profile')
     .get(requireAuth, authController.fetchProfile)
     .post(requireAuth, authController.updateProfile);
+  userRouter.route('/dens')
+    .delete(requireAuth, authController.deleteDen)
+    .post(requireAuth, authController.addDen);
 
   return userRouter;
 };

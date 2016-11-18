@@ -10,6 +10,7 @@ const userSchema = new Schema({
     unique: true,
     lowercase: true,
   },
+  customDens: [{ name: String, rank: String }],
   password: String,
   packNumber: String,
   name: String,

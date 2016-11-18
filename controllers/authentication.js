@@ -57,6 +57,7 @@ const authController = (User) => {
       const userProfile = {};
       userProfile.name = user.name;
       userProfile.packNumber = user.packNumber;
+      userProfile.customDens = user.customDens;
       res.status(200).json(userProfile);
     });
   };
@@ -73,10 +74,56 @@ const authController = (User) => {
       res.status(201).json(userProfile);
     });
   };
+  
+  const addDen = (req, res, next) => {
+    console.log(req.body);
+     User.findById(req.user._id, (err, user) => {
+      if (err) { return next(err); }
+     
+      user.customDens.push(req.body);
+      
+      user.save((error) => {
+        if (error) { return next(error); }
+        
+        const userProfile = {};
+        userProfile.name = user.name;
+        userProfile.packNumber = user.packNumber;
+        userProfile.customDens = user.customDens;
+        
+        res.status(201).json(userProfile);
+      });
+    });
+  };
+  
+  const deleteDen = (req, res, next) => {
+     User.findById(req.user._id, (err, user) => {
+      if (err) { return next(err); }
+     
+      const newDenList = user.customDens.filter(den => (
+        den.name !== req.body.name
+      ));
+      
+      user.customDens = newDenList;
+      
+      user.save((error) => {
+        if (error) { return next(error); }
+        
+        const userProfile = {};
+        userProfile.name = user.name;
+        userProfile.packNumber = user.packNumber;
+        userProfile.customDens = user.customDens;
+        
+        res.status(201).json(userProfile);
+      });
+    });
+  };
+  
 
   return {
     signin,
     signup,
+    addDen,
+    deleteDen,
     fetchProfile,
     updateProfile,
   };

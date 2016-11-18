@@ -18,8 +18,10 @@ const routes = function routes(User) {
     .get(requireAuth, authController.fetchProfile)
     .post(requireAuth, authController.updateProfile);
   userRouter.route('/dens')
-    .delete(requireAuth, authController.deleteDen)
     .post(requireAuth, authController.addDen);
+
+  userRouter.route('/dens/remove')
+    .post(requireAuth, authController.deleteDen);
 
   return userRouter;
 };

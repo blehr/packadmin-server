@@ -71,6 +71,7 @@ const authController = (User) => {
       const userProfile = {};
       userProfile.name = user.name;
       userProfile.packNumber = user.packNumber;
+      userProfile.customDens = user.customDens;
       res.status(201).json(userProfile);
     });
   };

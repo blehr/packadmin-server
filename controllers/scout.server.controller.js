@@ -17,7 +17,7 @@ const scoutController = (Scout) => {
       if (err) {
         res.status(422).send(err);
       } else {
-        res.status(201).json({ scout });
+        res.status(201).json(scout);
       }
     });
   };

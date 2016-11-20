@@ -10,7 +10,7 @@ const TigerSchema = new Schema({
   myFamilysDutyToGod: Date,
   teamTiger: Date,
   tigerBites: Date,
-  tigersInTheWil: Date,
+  tigersInTheWild: Date,
   curiousityIntrigueMagicalMysteries: Date,
   earningYourStripes: Date,
   familyStories: Date,

@@ -8,3 +8,4 @@ config.js
 .dev.env
 .production.env
 cloud9.env
+.vscode

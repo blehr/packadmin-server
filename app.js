@@ -8,6 +8,15 @@ const cors = require('cors');
 const flash = require('connect-flash');
 const helmet = require('helmet');
 
+if (process.env.NODE_ENV === 'production') {
+  require('dotenv').config({ path: './.production.env' });
+}
+if (process.env.NODE_ENV === 'development') {
+  require('dotenv').config({ path: './.dev.env' });
+}
+if (process.env.NODE_ENV === 'cloud9') {
+  require('dotenv').config({ path: './cloud9.env' });
+}
 
 const host = process.env.IP || 'localhost';
 

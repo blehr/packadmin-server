@@ -1,18 +1,18 @@
 const jwt = require('jwt-simple');
-const config = require('../config');
 const nodemailer = require('nodemailer');
 const mg = require('nodemailer-mailgun-transport');
 
 const auth = {
   auth: {
-    api_key: 'key-bac967c5a973acbd6815cc35599173e1',
-    domain: 'packadmin.com',
+    api_key: process.env.MAILGUN_API_KEY,
+    domain: process.env.DOMAIN,
   },
 };
 
 // const ROOT_URL = 'http://express-project-brandonl.c9users.io:8081/reset/';
 // const ROOT_URL = 'http://localhost:8081/reset/';
-const ROOT_URL = 'https://packadmin.com/reset/';
+// const ROOT_URL = 'https://packadmin.com/reset/';
+const ROOT_URL = process.env.SERVER_ROOT_URL;
 
 const nodemailerMailgun = nodemailer.createTransport(mg(auth));
 
@@ -21,7 +21,7 @@ const resetPasswordController = (User) => {
   // create a token
   const createToken = (user) => {
     const timestamp = new Date().getTime();
-    return jwt.encode({ sub: user.id, iat: timestamp }, config.secret);
+    return jwt.encode({ sub: user.id, iat: timestamp }, process.env.SECRET);
   };
 
   const initiateReset = (req, res, next) => {
@@ -74,7 +74,7 @@ const resetPasswordController = (User) => {
 
   const checkAndSave = (req, res, next) => {
     const token = req.params.token;
-    const decoded = jwt.decode(token, config.secret);
+    const decoded = jwt.decode(token, process.env.SECRET);
     const createdAt = decoded.iat;
 
     User.findOne({ resetToken: token }, (err, user) => {
@@ -91,7 +91,7 @@ const resetPasswordController = (User) => {
 
   const submitNewPassword = (req, res, next) => {
     const token = req.params.token;
-    const decoded = jwt.decode(token, config.secret);
+    const decoded = jwt.decode(token, process.env.SECRET);
     const createdAt = decoded.iat;
 
     User.findOne({ resetToken: token }, (err, user) => {

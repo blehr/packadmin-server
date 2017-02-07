@@ -3,8 +3,9 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "nodemon ./bin/www",
-    "production": "node bin/www env NODE_ENV=production",
+    "dev": "cross-env NODE_ENV=development nodemon ./bin/www",
+    "production": "cross-env NODE_ENV=production node bin/www",
+    "c9": "cross-env NODE_ENV=cloud9 nodemon ./bin/www",
     "eslint": "eslint ."
   },
   "dependencies": {
@@ -14,7 +15,9 @@
     "connect-flash": "^0.1.1",
     "cookie-parser": "~1.4.3",
     "cors": "^2.8.1",
+    "cross-env": "^3.1.4",
     "debug": "~2.2.0",
+    "dotenv": "^4.0.0",
     "ejs": "~2.4.1",
     "express": "~4.13.4",
     "helmet": "^3.1.0",

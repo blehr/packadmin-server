@@ -3,7 +3,7 @@ module.exports = {
     name: 'packAdmin',
     script: './bin/www',
     env: {
-      NODE_ENV: 'development',
+      NODE_ENV: 'production',
     },
   },
 };

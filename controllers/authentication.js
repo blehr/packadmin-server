@@ -1,12 +1,11 @@
 const jwt = require('jwt-simple');
-const config = require('../config');
 
 
 const authController = (User) => {
   // create token
   function tokenForUser(user) {
     const timestamp = new Date().getTime();
-    return jwt.encode({ sub: user.id, iat: timestamp }, config.secret);
+    return jwt.encode({ sub: user.id, iat: timestamp }, process.env.SECRET);
   }
 
   const signin = (req, res, next) => {

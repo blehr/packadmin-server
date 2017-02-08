@@ -1,4 +1,5 @@
-# Pack Admin Backend
+
+![PackAdmin Logo](https://dl.dropboxusercontent.com/u/21809793/pack_admin_logo.png)
 
 ## The PackAdmin
 

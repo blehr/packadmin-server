@@ -1,26 +1,15 @@
 # Pack Admin Backend
 
-## Instructions
+## The PackAdmin
 
-1. clone server-side as packAdmin
-2. `cd packAdmin`
-3. `rm -r client`  this deletes folder and all
-4. clone client-side as client
-5. `cd client`
-6. `npm install` dependencies
-7. check for proper link in app/actions/index.js `export const ROOT_URL = 'https://packadmin.com';`
-8. `npm run build`
-9. `cd ..`
-10. `npm install` dependencies
-12. `pm2 start startup.config.js`
-13. `pm2 startup` to create startup script
-14. `pm2 sav`e to save it
-15. `sudo systemctl restart nginx` to restart nginx
+[packadmin.com](https://packadmin.com)
 
+The PackAdmin, is free software for managing your Cub Scout Pack. Easily and securely store and retrieve all of your scout, parent, and leader information from anywhere and on any device. Track all of your scouts' accomplishments and have convientient access to this information for planning and purchasing for advancement ceremonies.
 
-### extras
+### The Tech
 
-* `crontab -e` to edit user cron
-* `mail` to read mail, then enter message #
-* `quit` exits and marks as read
+The backend is constructed in NodeJs, utilizing an Express server and MongoDB database. 
 
+Authentication and authorization is handled through PassportJS. All API routes are protected through the use of JWT tokens. The client, server connection is secured with ssl enabled through Let's Encrypt.
+
+The frontend is a single page React app, utilizing react router and redux. 

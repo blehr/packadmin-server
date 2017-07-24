@@ -7,6 +7,7 @@ const mongoose = require('mongoose');
 const cors = require('cors');
 const flash = require('connect-flash');
 const helmet = require('helmet');
+const expressValidator = require('express-validator');
 
 if (process.env.NODE_ENV === 'production') {
   require('dotenv').config({ path: './.production.env' });
@@ -46,6 +47,7 @@ app.set('view engine', 'ejs');
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
+app.use(expressValidator());
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'client/dist')));
 app.use(flash());

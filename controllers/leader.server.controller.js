@@ -1,3 +1,37 @@
+const leaderFields = [
+  "firstName",
+  "lastName",
+  "birthday",
+  "streetAddress",
+  "mailAddress",
+  "city",
+  "state",
+  "zipCode",
+  "mobilePhone",
+  "homePhone",
+  "workPhone",
+  "driversLicense",
+  "email",
+  "youthProtection",
+  "position",
+  "notes"
+];
+
+function validateLeader(req, arrayOfFields) {
+  arrayOfFields.forEach(field => {
+    if (req.body.data[field]) {
+      req.sanitizeBody(`data.${field}`).trim();
+      req.sanitizeBody(`data.${field}`).escape();
+    } else {
+      return;
+    }
+  });
+}
+
+
+
+
+
 const leaderController = (Leader) => {
   const getAll = (req, res) => {
     const query = Leader.find({ owner: req.user._id });
@@ -10,6 +44,9 @@ const leaderController = (Leader) => {
 
   const addLeader = (req, res) => {
     req.body.data.owner = req.user._id;
+
+    validateLeader(req, leaderFields);
+
     const leader = new Leader(req.body.data);
 
     leader.save((err) => {
@@ -23,6 +60,9 @@ const leaderController = (Leader) => {
 
 
   const updateLeader = (req, res) => {
+
+    validateLeader(req, leaderFields);
+
     const options = {
       new: true,
       upsert: true,
